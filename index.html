@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JSONデータの表示</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="users"></div>
+
+    <script>
+      // JSONデータの取得
+      fetch("test.json")
+        .then((response) => response.json())
+        .then((data) => {
+          // users要素の取得
+          const users = data.users;
+
+          // users要素の展開
+          let usersHTML = "";
+          users.forEach((user) => {
+            usersHTML += `
+              <div>
+                <p>ID: ${user.id}</p>
+                <p>名前: ${user.name}</p>
+                <p>メールアドレス: ${user.email}</p>
+                <p>パスワード: ${user.password}</p>
+              </div>
+            `;
+          });
+
+          // users要素の挿入
+          const usersContainer = document.getElementById("users");
+          usersContainer.innerHTML = usersHTML;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    </script>
+  </body>
+</html>
